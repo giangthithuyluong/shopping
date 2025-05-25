@@ -1,26 +1,22 @@
 <script setup>
-    import { ref, onMounted } from 'vue'
+    import { ref, watch, onMounted } from 'vue'
     import CartItem from '@/components/CartItem.vue'
     import Default from '@/layouts/Default.vue'
     import { useCartStore } from '@/stores/cart.js'
     const cartStore = useCartStore()
     const cart = ref([])
     const cartTotal = ref(cart.value.reduce((total, item) => total + item.price * item.quantity, 0))
-    function formatPrice(price) {
-        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
-    }
     function Increase(id) {
         cartStore.increase(id)
         cart.value = cartStore.getProducts()
-        console.log(cartStore.getProducts());
-        
     }
     function Decrease(id) {
         cartStore.decrease(id)
         cart.value = cartStore.getProducts()
-        console.log(cartStore.getProducts());
-        
     }
+    watch(cart, () => {
+        cartTotal.value = cart.value.reduce((total, item) => total + item.price * item.quantity, 0)
+    }, {deep: true})
     onMounted(() => {
         console.log(cartStore.getProducts());
         
@@ -47,7 +43,7 @@
                     </li>
                 </ul>
                 <div class="cart-total">
-                    <strong>Tổng cộng: {{ formatPrice(cartTotal) }}</strong>
+                    <strong>Tổng cộng: {{ cartTotal }} VND</strong>
                 </div>
                 <button class="checkout-btn">Thanh toán</button>
             </div>
