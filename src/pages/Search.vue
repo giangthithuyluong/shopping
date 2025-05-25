@@ -1,30 +1,24 @@
 <script setup>
     import { ref } from 'vue'
     import Default from '@/layouts/Default.vue'
+    import ProductItem from '@/components/ProductItem.vue'
+    import { useProductStore } from '@/stores/product'
 
+    const productStore = useProductStore()
     const query = ref('')
-    const results = ref([])
-    const searched = ref(false)
-
-    const data = [
-        'Vue.js',
-        'React',
-        'Angular',
-        'Svelte',
-        'Node.js',
-        'JavaScript',
-        'TypeScript'
-    ]
+    const results = ref(productStore.items)
+    const isSearch = ref(false)
 
     function performSearch() {
-        searched.value = true
-        if (!query.value.trim()) {
-            results.value = []
-            return
+        if(!isSearch.value) {
+            isSearch.value = true
+            if (!query.value.trim()) {
+                results.value = productStore.items
+            } else {
+                results.value = productStore.filterProducts(query.value)
+            }
+            isSearch.value = false
         }
-        results.value = data.filter(item =>
-            item.toLowerCase().includes(query.value.toLowerCase())
-        )
     }
 </script>
 
@@ -38,17 +32,17 @@
                 type="text"
                 placeholder="Nhập từ khóa tìm kiếm..."
             />
-            <button @click="performSearch">Tìm kiếm</button>
+            <button @click="performSearch">{{isSearch ? "Đang tìm kiếm..." : "Tìm kiếm"}}</button>
 
             <div v-if="results.length">
-                <h2>Kết quả:</h2>
+                <h2>Kết quả ({{ results.length }}):</h2>
                 <ul>
                     <li v-for="(item, index) in results" :key="index">
-                        {{ item }}
+                        <ProductItem :product="item" :width="300" />
                     </li>
                 </ul>
             </div>
-            <div v-else-if="searched">
+            <div v-else>
                 <p>Không tìm thấy kết quả nào.</p>
             </div>
         </div>
@@ -57,7 +51,7 @@
 
 <style scoped>
 .search-page {
-    max-width: 500px;
+    width: 90%;
     margin: 40px auto;
     padding: 24px;
     border: 1px solid #eee;
@@ -85,5 +79,12 @@ button:hover {
 ul {
     margin-top: 16px;
     padding-left: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    place-items: center;
+    gap: 20px;
+    li > * {
+        max-width: 100%;
+    }
 }
 </style>
