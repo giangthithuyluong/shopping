@@ -30,8 +30,8 @@
             <button v-if="auth.isLogin" @click="handleLogout">Logout</button>
         </nav>
         <main>
-            <button v-if="isGoBack" @click="router.back()" class="go-back">Quay lại</button>
             <slot></slot>
+            <button v-if="isGoBack" @click="router.back()" class="go-back">Quay lại</button>
         </main>
         <footer>
             <p>&copy; 2025 Giang Thi Thuy Luong</p>

@@ -1,29 +1,20 @@
 <script setup>
-    import { onMounted } from 'vue'
+    import { ref, onMounted } from 'vue'
     import Default from '../layouts/Default.vue'
     import ProductItem from '@/components/ProductItem.vue'
-    import CartItem from '@/components/CartItem.vue'
     import { useAuthStore } from '@/stores/auth'
     import { useProductStore } from '@/stores/product.js'
     import { useCartStore } from '@/stores/cart.js'
     const auth = useAuthStore()
-    const products = useProductStore()
-    const cart = useCartStore()
+    const productStore = useProductStore()
+    const category = ref({})
+    const cartStore = useCartStore()
     onMounted(async () => {
-        await products.fetchProducts()
-        await cart.fetchCart()
-        
+        await productStore.fetchProducts()
+        await cartStore.fetchCart()
+        category.value = productStore.groupByCategory()
+        console.log(productStore.groupByCategory());
     })
-    const mokedata = {
-        category: "men's clothing",
-        description: "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-        id: 1,
-        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-        price: 109.95,
-        rating: {rate: 3.9, count: 120},
-        title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-        count: 2
-    }
 </script>
 
 <template>
@@ -37,7 +28,14 @@
                 .
             </p>
         </div>
-        <CartItem v-if="cart.items.length > 0" :cart="cart.getProducts()[0]" />
+        <div v-for="(value, key) in category" class="category" :key="key">
+            <h3>{{ key }}</h3>
+            <ul>
+                <li v-for="item in value">
+                    <ProductItem :product="item"/> 
+                </li>
+            </ul>
+        </div>
     </Default>
 </template>
 
@@ -47,6 +45,20 @@
     .user-name {
         font-weight: bold;
         color: #42b983;
+    }
+}
+.category {
+    padding: 20px;
+    & > h3 {
+        border-left: 5px solid #42b983;
+        padding-left: 10px;
+        text-transform: uppercase;
+    }
+    ul {
+        width: 100%;
+        display: flex;
+        gap: 20px;
+        overflow-x: scroll;
     }
 }
 </style>

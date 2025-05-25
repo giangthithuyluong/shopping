@@ -46,10 +46,19 @@ export const useProductStore = defineStore('products', () => {
             } else {
                 obj[category] = [product]
             }
+            return obj
         }, {})
     }
     function getWithId(id) {
         return items.value.find(p => p.id == id)
+    }
+    function filterProducts(text) {
+        text = text.toLowerCase()
+        return items.value.filter(p => 
+            p.title.toLowerCase().includes(text) ||
+            p.category.toLowerCase().includes(text) ||
+            (!isNaN(parseFloat(text)) && p.price <= parseFloat(text))
+        )
     }
 
     return { 
@@ -58,6 +67,7 @@ export const useProductStore = defineStore('products', () => {
         error, 
         fetchProducts,
         groupByCategory,
-        getWithId
+        getWithId,
+        filterProducts
     }
 })

@@ -41,7 +41,7 @@
             <div>
                 <button type="button" @click="router.push('/signup')" class="signup">Đăng ký</button>
             </div>
-            <button v-if="auth.isLoading" class="submit">Đang đăng nhập...</button>
+            <button v-if="auth.isLoading" type="button" class="submit">Đang đăng nhập...</button>
             <button v-else type="submit" class="submit">Đăng nhập</button>
             <p v-show="auth.error != null">{{ auth.error }}</p>
         </form>
@@ -101,7 +101,10 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    &:hover {
+    &[type='button'] {
+        background-color: #369870;
+    }
+    &[type='submit']:hover {
         background: #369870;
     }
 }
