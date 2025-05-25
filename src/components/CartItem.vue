@@ -14,7 +14,7 @@
 
 <template>
     <div class="cart-item">
-        <div class="image">
+        <div class="image" @click="router.push('/productdesc/'+cart.id)">
             <img v-if="cart.image" :src="cart.image" :alt="cart.title" class="cart-item-image" />
             <div v-else class="cart-item-image no-data" />
         </div>
@@ -50,6 +50,7 @@
             width: 30%;
             border-radius: 8px;
             overflow: hidden;
+            cursor: pointer;
             .cart-item-image {
                 width: 100%;
                 height: 100%;
