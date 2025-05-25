@@ -1,0 +1,44 @@
+@import "./base.css";
+
+@keyframes dataloading {
+  from {
+    transform: translateX(-75%);
+  }
+  to {
+    transform: translateX(0);
+  }
+  
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+li {
+  list-style: none;
+  color: inherit;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  &::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1px;
+    background-color: #181818;
+    transition: width 0.3s ease-in-out;
+  }
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+}
