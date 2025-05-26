@@ -1,5 +1,11 @@
 @import "./base.css";
 
+:root {
+  --xanh: #42b983;
+  --xanh-dam: #369870;
+  --do: #b94242;
+}
+
 @keyframes dataloading {
   from {
     transform: translateX(-75%);

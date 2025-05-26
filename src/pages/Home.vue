@@ -39,13 +39,13 @@
     padding: 20px;
     .user-name {
         font-weight: bold;
-        color: #42b983;
+        color: var(--xanh);
     }
 }
 .category {
     padding: 20px;
     & > h3 {
-        border-left: 5px solid #42b983;
+        border-left: 5px solid var(--xanh);
         padding-left: 10px;
         text-transform: uppercase;
     }

@@ -95,22 +95,22 @@
     font-size: 1rem;
     background-color: transparent;
     &:hover {
-        color: #369870;
+        color: var(--xanh-dam);
     }
 }
 .signin button.submit {
     width: 100%;
     padding: 10px;
-    background: #42b983;
+    background: var(--xanh);
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     &[type='button'] {
-        background-color: #369870;
+        background-color: var(--xanh-dam);
     }
     &[type='submit']:hover {
-        background: #369870;
+        background: var(--xanh-dam);
     }
 }
 @media only screen and (max-width: 768px) {

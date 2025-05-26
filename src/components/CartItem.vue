@@ -82,7 +82,7 @@
             width: 50px;
             height: 100%;
             color: #fff;
-            background-color: rgb(201, 51, 31);
+            background-color: var(--do);
         }
     }
     .no-data::after {

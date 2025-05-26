@@ -79,7 +79,7 @@
     button {
         flex: 1;
         padding: 10px;
-        background: #42b983;
+        background: var(--xanh);
         color: #fff;
         border: none;
         border-radius: 4px;

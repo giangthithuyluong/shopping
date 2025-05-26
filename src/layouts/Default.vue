@@ -51,6 +51,7 @@
             <p>&copy; 2025 Giang Thi Thuy Luong</p>
             <a href="https://github.com/giangthithuyluong">Github</a>
         </footer>
+        <slot name="modal"></slot>
     </div>
 </template>
 
@@ -82,12 +83,12 @@
                 justify-content: space-around;
                 align-items: center;
                 .close-link {
-                    background-color: #b94242;
+                    background-color: var(--do);
                 }
             }
             button {
                 padding: 10px 20px;
-                background-color: #42b983;
+                background-color: var(--xanh);
                 color: white;
                 border: none;
                 border-radius: 4px;
@@ -100,13 +101,13 @@
             .go-back {
                 margin: 10px;
                 padding: 10px 20px;
-                background-color: #42b983;
+                background-color: var(--xanh);
                 color: white;
                 border: none;
                 border-radius: 4px;
                 cursor: pointer;
                 &:hover {
-                    background-color: #369870;
+                    background-color: var(--xanh-dam);
                 }
             }
         }

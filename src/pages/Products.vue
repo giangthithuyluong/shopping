@@ -26,7 +26,7 @@
 
 <style scoped>
 .products-page {
-    background-color: #e3f7db;
+    background-color: #e1ebde;
     h1 {
         margin-bottom: 16px;
     }

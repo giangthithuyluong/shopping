@@ -69,12 +69,12 @@ button {
     padding: 8px 16px;
     border-radius: 4px;
     border: none;
-    background: #42b983;
+    background: var(--xanh);
     color: #fff;
     cursor: pointer;
 }
 button:hover {
-    background: #369870;
+    background: var(--xanh-dam);
 }
 ul {
     width: 100%;

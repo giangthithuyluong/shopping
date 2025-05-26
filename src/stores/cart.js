@@ -92,6 +92,23 @@ export const useCartStore = defineStore('cart', () => {
         return false
     }
 
+    function add(id, quantity) {
+        if(items.value && quantity > 0) {
+            let ps = items.value.products
+            let p = ps.find(p => p.productId == id)
+            p ? p.quantity+=quantity : ps.push({
+                productId: id,
+                quantity: quantity
+            })
+            items.value = {
+                ...items.value,
+                products: ps
+            }
+            return true
+        }
+        return false
+    }
+
     return {
         items,
         isLoading,
@@ -99,6 +116,7 @@ export const useCartStore = defineStore('cart', () => {
         fetchCart,
         getProducts,
         increase,
-        decrease
+        decrease,
+        add
     }
 })
