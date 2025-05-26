@@ -38,7 +38,7 @@
                 <h2>Kết quả ({{ results.length }}):</h2>
                 <ul>
                     <li v-for="(item, index) in results" :key="index">
-                        <ProductItem :product="item" :width="300" />
+                        <ProductItem :product="item" :width="200" />
                     </li>
                 </ul>
             </div>
@@ -77,14 +77,28 @@ button:hover {
     background: #369870;
 }
 ul {
+    width: 100%;
     margin-top: 16px;
     padding-left: 20px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     place-items: center;
     gap: 20px;
-    li > * {
+    li {
         max-width: 100%;
+        & > * {
+            max-width: 100%;
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .search-page {
+        width: 100%;
+        margin: 0;
+        padding: 24px;
+        border: none;
+        border-radius: unset;
+        background: #fafbfc;
     }
 }
 </style>

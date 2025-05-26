@@ -22,14 +22,14 @@
         <div class="product-desc">
             <img :src="product.image" :alt="product.title">
             <div class="details">
-                <h1>{{ product.title }}</h1>
+                <h2>{{ product.title }}</h2>
                 <p><strong>Phân loại:</strong> {{ product.category }}</p>
                 <p><strong>Đánh giá:</strong> {{ product.rating?.rate }}</p>
                 <p><strong>Số lượng hiện có:</strong> {{ product.rating?.count }}</p>
                 <p><strong>Giá:</strong> {{ product.price }} VND</p>
-                <p>{{ product.description }}</p>
                 <button type="button">Thêm vào giỏ hàng</button>
             </div>
+            <p>{{ product.description }}</p>
         </div>
     </Default>
 </template>
@@ -43,18 +43,18 @@
     border: 1px solid #eee;
     border-radius: 8px;
     background: #fafafa;
-    display: flex;
-    align-items: self-start;
+    display: grid;
+    grid-template-columns: 30% 1fr;
     gap: 10px;
     img {
-        width: 40%;
+        width: 100%;
         object-fit: contain;
     }
     h1 {
         margin-bottom: 16px;
     }
     p {
-        margin-bottom: 8px;
+        grid-column: 1 / span2;
     }
     button {
         padding: 10px;

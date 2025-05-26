@@ -18,8 +18,6 @@
         cartTotal.value = cart.value.reduce((total, item) => total + item.price * item.quantity, 0)
     }, {deep: true})
     onMounted(() => {
-        console.log(cartStore.getProducts());
-        
         cart.value = cartStore.getProducts()
     })
 </script>
@@ -97,5 +95,14 @@
     color: #888;
     font-size: 18px;
     margin: 40px 0;
+}
+@media only screen and (max-width: 768px) {
+    .cart-page {
+        max-width: unset;
+        margin: 0;
+        padding: 24px;
+        border-radius: unset;
+        box-shadow: unset;
+    }
 }
 </style>

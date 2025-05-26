@@ -43,7 +43,7 @@
         border-radius: 8px;
         display: flex;
         align-items: center;
-        gap: 2px;
+        gap: 10px;
         overflow: hidden;
         .image {
             height: 90%;

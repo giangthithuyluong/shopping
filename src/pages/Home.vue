@@ -4,16 +4,11 @@
     import ProductItem from '@/components/ProductItem.vue'
     import { useAuthStore } from '@/stores/auth'
     import { useProductStore } from '@/stores/product.js'
-    import { useCartStore } from '@/stores/cart.js'
     const auth = useAuthStore()
     const productStore = useProductStore()
     const category = ref({})
-    const cartStore = useCartStore()
     onMounted(async () => {
-        await productStore.fetchProducts()
-        await cartStore.fetchCart()
         category.value = productStore.groupByCategory()
-        console.log(productStore.groupByCategory());
     })
 </script>
 
@@ -55,6 +50,7 @@
         text-transform: uppercase;
     }
     ul {
+        padding: 10px;
         width: 100%;
         display: flex;
         gap: 20px;

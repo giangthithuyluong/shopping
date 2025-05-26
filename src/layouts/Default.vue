@@ -1,8 +1,11 @@
 <script setup>
+    import { onMounted, ref } from 'vue'
     import { useRouter } from 'vue-router'
     import { useAuthStore } from '@/stores/auth'
     const router = useRouter()
     const auth = useAuthStore()
+    const smallScreen = ref(false)
+    const openMore = ref(false)
 
     function handleLogout() {
         router.push('/signin')
@@ -15,13 +18,24 @@
             default: false
         }
     })
+    function changeMode() {
+        openMore.value = !openMore.value
+    }
+    onMounted(() => {
+        smallScreen.value = window.innerWidth <= 768
+    })
+    window.onresize = () => {
+        smallScreen.value = window.innerWidth <= 768
+        openMore.value = false
+    }
 </script>
 
 <template>
     <div class="default-layout">
         <nav>
-            <div>
-                <input type="checkbox" name="routerLink" id="router-link">
+            <button v-show="smallScreen" type="button" class="open-link" @click="changeMode">Mở rộng</button>
+            <div v-if="!smallScreen || openMore" class="router-link-container">
+                <button v-show="smallScreen" type="button" class="close-link" @click="changeMode">Đóng</button>
                 <router-link to="/home">Trang chủ</router-link>
                 <router-link to="/products">Sản phẩm</router-link>
                 <router-link to="/search">Tìm kiếm</router-link>
@@ -45,6 +59,8 @@
         --nav-height: 50px;
     }
     .default-layout {
+        width: 100%;
+        max-width: 100vw;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -65,9 +81,9 @@
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
-            }
-            input#router-link{
-                display: none;
+                .close-link {
+                    background-color: #b94242;
+                }
             }
             button {
                 padding: 10px 20px;
@@ -101,9 +117,20 @@
             background-color: #181818;
         }
     }
-    @media screen and (max-width: 768px) {
-        nav > div{
-            display: none;
+    @media only screen and (max-width: 768px) {
+        nav > div.router-link-container{
+            max-width: unset;
+            width: 100vw;
+            height: 100vh;
+            background-color: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
         }
     }
 </style>

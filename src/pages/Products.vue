@@ -26,14 +26,16 @@
 
 <style scoped>
 .products-page {
+    background-color: #e3f7db;
     h1 {
         margin-bottom: 16px;
     }
     .product-list {
         padding: 10px;
         display: grid;
+        place-items: center;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 10px;
+        gap: 20px 10px;
     }
 }
 </style>

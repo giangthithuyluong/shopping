@@ -45,7 +45,8 @@
 
 <style scoped>
 .signup-page {
-    max-width: 400px;
+    width: 400px;
+    max-width: 100vw;
     margin: 40px auto;
     padding: 24px;
     border: 1px solid #ddd;

@@ -2,6 +2,8 @@
     import { ref } from 'vue'
     import { useRouter } from 'vue-router'
     import { useAuthStore } from '@/stores/auth'
+    import { useProductStore } from '@/stores/product'
+    import { useCartStore } from '@/stores/cart'
 
     const router = useRouter()
     const auth = useAuthStore()
@@ -14,6 +16,8 @@
         } finally {
             if (auth.isLogin) {
                 alert('Đăng nhập thành công!')
+                await useProductStore().fetchProducts()
+                await useCartStore().fetchCart()
                 router.push('/home')
             } else {
                 alert(auth.error)
@@ -50,7 +54,8 @@
 
 <style scoped>
 .signin {
-    max-width: 400px;
+    width: 400px;
+    max-width: 100vw;
     margin: 40px auto;
     padding: 24px;
     border: 1px solid #ccc;
@@ -106,6 +111,11 @@
     }
     &[type='submit']:hover {
         background: #369870;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .signin {
+        border: none;
     }
 }
 </style>
