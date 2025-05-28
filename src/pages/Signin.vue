@@ -7,8 +7,11 @@
 
     const router = useRouter()
     const auth = useAuthStore()
+    const isPass = ref(true)
     const username = ref('mor_2314')
     const password = ref('83r5^_')
+
+    function handlePass() {isPass.value = !isPass.value}
 
     async function handleSignin() {
         try {
@@ -38,8 +41,16 @@
             <div>
                 <label for="password">Mật khẩu:</label>
                 <div class="password">
-                    <input type="password" v-model="password" id="password" required />
-                    <input type="checkbox" onclick="password.type = this.checked ? 'text' : 'password'">        
+                    <input 
+                        :type="isPass ? 'password' : 'text'" 
+                        v-model="password" 
+                        id="password" 
+                        required />
+                    <button 
+                        type="button" 
+                        :class="isPass ? 'hide-password' : 'unhide-password'"
+                        @click="handlePass"
+                    ></button>        
                 </div>    
             </div>
             <div>
@@ -83,9 +94,13 @@
     input[type="password"] {
         flex-grow: 1;
     }
-    input[type="checkbox"] {
+    button {
         width: 50px;
-        accent-color: #000;
+        border: 1px solid black;
+        background-color: #fff;
+        &.hide-password {
+            background-color: #000;
+        }
     }
 }
 .signin button.signup {

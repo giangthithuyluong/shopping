@@ -8,7 +8,7 @@
         },
         increase: Function,
         decrease: Function,
-        delete: Function
+        deleteProduct: Function
     })
 </script>
 
@@ -29,7 +29,7 @@
                 <button class="btn btn-secondary" @click="increase">Tăng</button>
             </div>
         </div>
-        <button class="cart-delete" @click="delete">Bỏ</button>
+        <button class="cart-delete" @click="deleteProduct">Bỏ</button>
     </div>
 </template>
 

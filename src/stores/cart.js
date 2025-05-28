@@ -108,6 +108,20 @@ export const useCartStore = defineStore('cart', () => {
         }
         return false
     }
+    function deleteProduct(id) {
+        if(items.value && items.value.products.find(p => p.productId == id)) {
+            let ps = items.value.products
+            let index = items.value.products.findIndex(p => p.productId == id)
+            ps.splice(index, 1)
+            items.value = {
+                ...items.value,
+                products: ps
+            }
+        }
+    }
+    function reloadCart() {
+        items.value.products = []
+    }
 
     return {
         items,
@@ -117,6 +131,8 @@ export const useCartStore = defineStore('cart', () => {
         getProducts,
         increase,
         decrease,
-        add
+        add,
+        deleteProduct,
+        reloadCart
     }
 })

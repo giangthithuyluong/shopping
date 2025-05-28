@@ -14,6 +14,18 @@
         cartStore.decrease(id)
         cart.value = cartStore.getProducts()
     }
+    function Delete(id) {
+        console.log(id);
+        
+        cartStore.deleteProduct(id)
+        cart.value = cartStore.getProducts()
+    }
+    function Complete() {
+        if(confirm('Sau khi nhấn thanh toán, giỏ hàng của bạn sẽ được làm mới, bạn chắc chứ?')) {
+            cartStore.reloadCart()
+            cart.value = []
+        }
+    }
     watch(cart, () => {
         cartTotal.value = cart.value.reduce((total, item) => total + item.price * item.quantity, 0)
     }, {deep: true})
@@ -36,14 +48,14 @@
                             :cart="item" 
                             :increase="() => Increase(item.id)"
                             :decrease="() => Decrease(item.id)"
-                            :delete="() => alert('Chức năng chưa hoàn thành')"
+                            :delete-product="() => Delete(item.id)"
                         />
                     </li>
                 </ul>
                 <div class="cart-total">
                     <strong>Tổng cộng: {{ cartTotal }} VND</strong>
                 </div>
-                <button class="checkout-btn">Thanh toán</button>
+                <button class="checkout-btn" @click="Complete">Thanh toán</button>
             </div>
         </div>
     </Default>
